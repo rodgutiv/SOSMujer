@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title>SOS Mujer</title>
+    
+    <!-- Librerías menos pesadas y estilos -->
+    <link rel="stylesheet" href="js/sosmujer.min.css">
+    <link rel="stylesheet" href="js/jquery.mobile.icons.min.css">
+    <link rel="stylesheet" href="js/jquery.mobile.structure-1.4.5.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    </head>
+    <body>
+<!-- Primer Página: #one -->
+<div data-role="page" id="one">
+
+	<!--  <div data-role="header">
+		<h4>Bienvenidos</h4>
+	</div>/header -->
+
+	<div role="main" class="ui-content">
+        
+		    <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <img src="img/sos.png" alt="SOS Mujer">
+                </div>
+            <div class="ui-block-b"></div>
+            </div><!-- /grid-b -->
+        
+        <br><br><br><br>
+           <p><b>Usuarios Registrados</b></p>
+            <a href="#signin" class="ui-btn ui-corner-all ui-shadow">Ingresar</a>
+            <br><p><b>¿No tienes cuenta?</b></p>
+            <a href="#signup" class="ui-btn ui-corner-all ui-shadow">Registrar</a> 
+		
+	</div><!-- /content -->
+
+	<div data-role="footer" data-position="fixed" data-theme="c">
+		<h2>¿Dudas o Sugerencias?</h2>
+	</div><!-- /footer -->
+</div><!-- /page one -->
+        
+<!-- Página de Logeo: #signin -->
+<div data-role="page" id="signin">
+
+	<div data-role="header">
+		<h4>Ingresar</h4>
+        <a href="#one" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Regresar</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		
+        <br><br><br>
+        <form id="ingresar" data-ajax="false">
+            <label for="txt-email">Teléfono</label>
+            <input type="number" name="tel" pattern="[0-9]*" id="tel" value=""><br>
+            <label for="txt-password">Contraseña</label>
+            <input type="password" name="pass" id="pass" value=""><br><br>
+            <button type="submit" class="ui-btn ui-corner-all ui-shadow" id="entrar">Entrar</button>
+        </form>
+            <p><a href="#">¿Problemas para ingresar?</a></p>
+	</div><!-- /content -->
+</div><!-- /page signin -->
+
+<!-- Página de Logeo: #signin -->
+<div data-role="page" id="error">
+
+	<div data-role="header">
+		<h4>ERROR</h4>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p id="msj"></p>
+        <p><a href="#signin" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">OK</a></p>
+	</div><!-- /content -->
+</div><!-- /page error -->       
+
+<!-- Página de Registro: #signup -->
+<div data-role="page" id="signup">
+
+	<div data-role="header" style="border: 0px;">
+		<h6>Registrar</h6>
+        <a href="#one" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Regresar</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+        <br><br><br><br>
+        <form id="ingresar" data-ajax="false">
+            <label for="txt-email">Teléfono</label>
+            <input type="number" name="tel-r" pattern="[0-9]*" id="tel-r" value="">
+            <label for="txt-email">Teléfono de un familiar</label>
+            <input type="number" name="tel-f" pattern="[0-9]*" id="tel-f" value="">
+            <label for="text-basic">Email</label>
+            <input type="email" name="email-r" id="email-r" value="">
+            <label for="txt-password">Contraseña</label>
+            <input type="password" name="pass1" id="pass1" value="">
+            <label for="txt-password">Repetir Contraseña</label>
+            <input type="password" name="pass2" id="pass2" value=""><br>
+            <button type="submit" class="ui-btn ui-corner-all ui-shadow" id="registrar">Regístrarse</button>
+        </form>
+	</div><!-- /content -->
+</div><!-- /page signup --> 
+    
+<!-- Página donde se muestra mapa -->
+<div data-role="page" id="three">
+
+	<div data-role="header">
+		<h4>SOS Mujer</h4>
+        <a href="#opciones" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-bars ui-btn-icon-notext">Options</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+		<p class="intro" id="demo"></p>
+        <div id="googleMap"></div>
+        
+        <div class="ui-grid-b">
+            <div class="ui-block-a"></div>
+            <div class="ui-block-b"><br>
+                <button id="sos" data-role="none" class="btn ui-shadow"><h4>S.O.S</h4></button>
+            </div>
+            <div class="ui-block-c"></div>
+        </div>
+	</div><!-- /content -->
+    <div data-role="footer" data-position="fixed">
+        <h2>¿Dudas o Sugerencias?</h2>
+	</div><!-- /footer -->
+    <div data-role="panel" data-position="right" data-display="reveal" id="opciones">
+        <a href="#" class="ui-btn  ui-shadow ui-corner-all  ui-icon-forbidden ui-btn-icon-left">Cancelar Alerta</a>
+        <a href="#" class="ui-btn  ui-shadow ui-corner-all  ui-icon-gear ui-btn-icon-left">Configuración</a><br>
+        <a href="#" class="ui-btn  ui-shadow ui-corner-all  ui-icon-power ui-btn-icon-left">Salir</a><br><br>
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <a href="#" data-rel="close" class="ui-btn ui-icon-back ui-shadow ui-corner-all ui-btn-d ui-btn-icon-notext">Regresar</a>
+                </div>
+            </div>
+    </div><!-- /panel -->
+</div><!-- /mapa -->
+      
+        
+        <!-- Librerías más pesadas -->
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="http://proyecto.myftp.org:3000/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/scripts.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
+    </body>
+</html>
