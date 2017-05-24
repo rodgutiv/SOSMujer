@@ -33,37 +33,32 @@
             <div class="ui-block-b"></div>
             </div><!-- /grid-b -->
         
-        <br><br><br><br>
-           <p><b>Usuarios Registrados</b></p>
+        <br><br><br><br><br><br>
             <a href="#signin" class="ui-btn ui-corner-all ui-shadow">Ingresar</a>
             <br><p><b>¿No tienes cuenta?</b></p>
-            <a href="#signup" class="ui-btn ui-corner-all ui-shadow">Registrar</a> 
+            <a href="#signup" class="ui-btn ui-corner-all ui-shadow">Registrate</a> 
 		
 	</div><!-- /content -->
-
-	<div data-role="footer" data-position="fixed" data-theme="c">
-		<h2>¿Dudas o Sugerencias?</h2>
-	</div><!-- /footer -->
 </div><!-- /page one -->
         
 <!-- Página de Logeo: #signin -->
 <div data-role="page" id="signin">
 
-	<div data-role="header">
+	<div data-role="header" style="border: 0px;">
 		<h4>Ingresar</h4>
         <a href="#one" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Regresar</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
 		
-        <br><br><br>
+        <br><br><br><br>
         <form id="ingresar" data-ajax="false">
             <label for="txt-email">Teléfono</label>
             <input type="number" name="tel" pattern="[0-9]*" id="tel" value=""><br>
             <label for="txt-password">Contraseña</label>
             <input type="password" name="pass" id="pass" value=""><br><br>
             <button type="submit" class="ui-btn ui-corner-all ui-shadow" id="entrar">Entrar</button>
-        </form>
+        </form><br><br>
             <p><a href="#">¿Problemas para ingresar?</a></p>
 	</div><!-- /content -->
 </div><!-- /page signin -->
@@ -102,7 +97,7 @@
             <input type="password" name="pass1" id="pass1" value="">
             <label for="txt-password">Repetir Contraseña</label>
             <input type="password" name="pass2" id="pass2" value=""><br>
-            <button type="submit" class="ui-btn ui-corner-all ui-shadow" id="registrar">Regístrarse</button>
+            <button type="submit" class="ui-btn ui-corner-all ui-shadow" id="registrar">CONFIRMAR</button>
         </form>
 	</div><!-- /content -->
 </div><!-- /page signup --> 
@@ -111,7 +106,7 @@
 <div data-role="page" id="three">
 
 	<div data-role="header">
-		<h4>SOS Mujer</h4>
+		<h4>S.O.S Mujer</h4>
         <a href="#opciones" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-bars ui-btn-icon-notext">Options</a>
 	</div><!-- /header -->
 
@@ -131,7 +126,7 @@
         <h2>¿Dudas o Sugerencias?</h2>
 	</div><!-- /footer -->
     <div data-role="panel" data-position="right" data-display="reveal" id="opciones">
-        <a href="#" class="ui-btn  ui-shadow ui-corner-all  ui-icon-forbidden ui-btn-icon-left">Cancelar Alerta</a>
+        <a href="#" id="cancel-alert" class="ui-btn  ui-shadow ui-corner-all  ui-icon-forbidden ui-btn-icon-left">Cancelar Alerta</a>
         <a href="#" class="ui-btn  ui-shadow ui-corner-all  ui-icon-gear ui-btn-icon-left">Configuración</a><br>
         <a href="#" class="ui-btn  ui-shadow ui-corner-all  ui-icon-power ui-btn-icon-left">Salir</a><br><br>
             <div class="ui-grid-a">

@@ -34,7 +34,7 @@
 	    <div class="col s3"><p>Menu Lateral</p></div>
 	    <div class="col s6">
 	    <ul id="messages" class="collection">
-	    <li class="collection-item active pink lighten-3"><h4>Alertas</h4></li>
+	    <li class="collection-item active red lighten-1"><h4>Alertas</h4></li>
 	    </ul>
 	    </div>
 	    <div class="col s3"><p></p></div>
@@ -57,12 +57,22 @@
     
     socket.on('chat message', function(msg){
     
-    var datos = msg.split("@");
-    var msj1 = '<li class="collection-item avatar"><i class="medium material-icons circle red">report_problem</i><span class="title"><b>Alerta enviada: </b>'+datos[3]+'</span><p>';
-    var msj2 = '<p><b <span class="red-text text-darken-2">Teléfono:</b> '+datos[0]+'<br><b>Teléfono de Familiar: </b>'+datos[1]+'</p>';
-    var msj3 = '</p><a href="http://maps.google.com/maps?q='+datos[2]+'" target="_blank" class="secondary-content"><i class="medium material-icons">my_location</i></a></li>';
-      
-      $('#messages').append(msj1+msj2+msj3);
+    var datos = msg.info.split("@");
+
+	if (parseInt(msj.al) == 1) {
+		 if($('ul#messages').find('li#a-'+datos[0]).length == 0){
+	    var msj1 = '<li id="a-'+datos[0]+'" class="collection-item avatar"><i class="medium material-icons circle red">report_problem</i><span class="title"><b>Alerta enviada: </b>'+datos[3]+'</span><p>';
+	    var msj2 = '<p><b <span class="red-text text-darken-2">Teléfono:</b> '+datos[0]+'<br><b>Teléfono de Familiar: </b>'+datos[1]+'</p>';
+	    var msj3 = '</p><a id="l-'+datos[0]+'" href="http://maps.google.com/maps?q='+datos[2]+'" target="_blank" class="secondary-content"><i class="medium material-icons">my_location</i></a></li>';
+	    $('#messages').append(msj1+msj2+msj3);
+	    }else {
+	    	$('ul#messages').find('a#l-'+datos[0]).attr('href','maps.google.com/maps?q='+datos[2]);
+	    }
+	}else {
+		$('ul#messages').find('li#a-'+datos[0]).remove();
+	}    
+    
+    
     });
 		});
 </script>

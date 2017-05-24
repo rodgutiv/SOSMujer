@@ -2,12 +2,26 @@
         
         $('button#sos').on('click', function(e){
             e.preventDefault();
-             navigator.geolocation.getCurrentPosition(function(position){
+              if(parseInt(localStorage.getItem("alerta")) == 0){
+
+                localStorage.setItem("alerta", 1);
+                navigator.geolocation.getCurrentPosition(function(position){
                var pos = position.coords.latitude  + ',' + position.coords.longitude+'@'+ Date();
                var socket = io.connect('http://proyecto.myftp.org:3000');
-               socket.emit('chat message', localStorage.getItem("telefono")+'@'+pos);
-            });
+               socket.emit('chat message', {info: localStorage.getItem("telefono")+'@'+pos, al: 1});
+               //cordova.plugins.backgroundMode.setDefaults({hidden: true});
+               cordova.plugins.backgroundMode.enable();
+                });
+            }
             
+        });
+        
+        $('a#cancel-alert').on('click', function(e){
+            e.preventDefault();
+            localStorage.setItem("alerta", 0);
+            var socket = io.connect('http://proyecto.myftp.org:3000');
+            socket.emit('chat message',{info: localStorage.getItem("telefono"), al: -1});
+            cordova.plugins.backgroundMode.disable();
         });
         
         $('button#entrar').on('click', function(e){
@@ -66,7 +80,8 @@ function loginCheck() {
                   $('div#error').find('p#msj').text('Algún campo es incorrecto, verfica nuevamente.');
                   $.mobile.pageContainer.pagecontainer("change", "#error", {role: 'dialog', transition: 'pop'});         
                   break;
-                    default: 
+                    default:
+                        localStorage.setItem("alerta", 0);
                         localStorage.setItem("telefono", info);
                         $.mobile.pageContainer.pagecontainer("change", "#three", { transition: 'slide'});  
                		}
