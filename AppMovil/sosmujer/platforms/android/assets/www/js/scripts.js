@@ -22,6 +22,7 @@
             var socket = io.connect('http://proyecto.myftp.org:3000');
             socket.emit('chat message',{info: localStorage.getItem("telefono"), al: -1});
             cordova.plugins.backgroundMode.disable();
+            $( "#popupCancel" ).popup( "open" );
         });
         
         $('button#entrar').on('click', function(e){
