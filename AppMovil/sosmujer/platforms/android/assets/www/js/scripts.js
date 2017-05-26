@@ -1,4 +1,5 @@
-    $(document).ready(function(){
+    $(document).ready(function() {
+        var socket = io.connect('http://proyecto.myftp.org:3000');
         
         $('button#sos').on('click', function(e){
             e.preventDefault();
@@ -7,7 +8,7 @@
                 localStorage.setItem("alerta", 1);
                 navigator.geolocation.getCurrentPosition(function(position){
                var pos = position.coords.latitude  + ',' + position.coords.longitude+'@'+ Date();
-               var socket = io.connect('http://proyecto.myftp.org:3000');
+               //var socket = io.connect('http://proyecto.myftp.org:3000');
                socket.emit('chat message', {info: localStorage.getItem("telefono")+'@'+pos, al: 1});
                //cordova.plugins.backgroundMode.setDefaults({hidden: true});
                cordova.plugins.backgroundMode.enable();
@@ -20,7 +21,6 @@
             e.preventDefault();
             if(parseInt(localStorage.getItem("alerta")) == 1){
             localStorage.setItem("alerta", 0);
-            var socket = io.connect('http://proyecto.myftp.org:3000');
             socket.emit('chat message',{info: localStorage.getItem("telefono"), al: -1});
             cordova.plugins.backgroundMode.disable();
             $( "#popupCancel" ).popup( "open" );

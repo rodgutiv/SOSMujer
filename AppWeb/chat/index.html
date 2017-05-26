@@ -56,7 +56,7 @@
     });
     
     socket.on('chat message', function(msg){
-    
+
     var datos = msg.info.split("@");
 
 	if (parseInt(msg.al) == 1) {
@@ -71,7 +71,7 @@
 	}else {
 		$('ul#messages').find('li#a-'+datos[0]).remove();
 	}    
-    
+
     });
     
     // Envia Alerta
