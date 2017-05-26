@@ -59,7 +59,7 @@
     
     var datos = msg.info.split("@");
 
-	if (parseInt(msj.al) == 1) {
+	if (parseInt(msg.al) == 1) {
 		 if($('ul#messages').find('li#a-'+datos[0]).length == 0){
 	    var msj1 = '<li id="a-'+datos[0]+'" class="collection-item avatar"><i class="medium material-icons circle red">report_problem</i><span class="title"><b>Alerta enviada: </b>'+datos[3]+'</span><p>';
 	    var msj2 = '<p><b <span class="red-text text-darken-2">Teléfono:</b> '+datos[0]+'<br><b>Teléfono de Familiar: </b>'+datos[1]+'</p>';

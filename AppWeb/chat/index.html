@@ -72,8 +72,31 @@
 		$('ul#messages').find('li#a-'+datos[0]).remove();
 	}    
     
-    
     });
+    
+    // Envia Alerta
+function alertar() {	
+    var tels = $('#tel').val();
+    $.ajax({
+        type: "POST",
+        url: "http://proyecto.myftp.org/hackton/login/login-session.php",
+        data:{tel: tels, pass: $('#pass').val()},
+        success:function(info){
+            //console.log(info);
+                switch(parseInt(info))
+                    {
+               	  case -1:
+                  $('div#error').find('p#msj').text('Algún campo es incorrecto, verfica nuevamente.');
+                  $.mobile.pageContainer.pagecontainer("change", "#error", {role: 'dialog', transition: 'pop'});         
+                  break;
+                    default:
+                        localStorage.setItem("alerta", 0);
+                        localStorage.setItem("telefono", info);
+                        $.mobile.pageContainer.pagecontainer("change", "#three", { transition: 'slide'});  
+               		}
+        }                  
+    });
+}
 		});
 </script>
   </body>
