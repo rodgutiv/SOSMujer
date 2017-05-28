@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     //$(document).ready(function() {
         // The watch id references the current `watchAcceleration`
         var watchID = null;
@@ -6,6 +7,10 @@
         var mAcc = null;
         var socket = null;
         var coordenadas = null;
+=======
+    $(document).ready(function() {
+        var socket = io.connect('http://proyecto.myftp.org:3000');
+>>>>>>> origin/master
         
         document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -24,8 +29,23 @@
 
         $('button#sos').on('click', function(e){
             e.preventDefault();
+<<<<<<< HEAD
             navigator.vibrate(1200);
             enviarSOS(); 
+=======
+              if(parseInt(localStorage.getItem("alerta")) == 0){
+
+                localStorage.setItem("alerta", 1);
+                navigator.geolocation.getCurrentPosition(function(position){
+               var pos = position.coords.latitude  + ',' + position.coords.longitude+'@'+ Date();
+               //var socket = io.connect('http://proyecto.myftp.org:3000');
+               socket.emit('chat message', {info: localStorage.getItem("telefono")+'@'+pos, al: 1});
+               //cordova.plugins.backgroundMode.setDefaults({hidden: true});
+               cordova.plugins.backgroundMode.enable();
+                });
+            }
+            
+>>>>>>> origin/master
         });
         
         //Este es un comentario para fingir que estoy tirando LDC, pero realmente estoy haciendome bien pendejo.

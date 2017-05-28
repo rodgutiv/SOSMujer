@@ -102,7 +102,11 @@
     });
 */
     socket.on('chat message', function(msg){
+<<<<<<< HEAD
 	console.log('Datos cada 6 seg: '+msg);
+=======
+
+>>>>>>> origin/master
     var datos = msg.info.split("@");
     Cookies.set('info', msg);
 	if (parseInt(msg.al) == 1) {
@@ -125,6 +129,7 @@
 	    	$('ul#messages').find('a#l-'+datos[0]).attr('href','maps.google.com/maps?q='+datos[2]);
         //To divide lat and long to put them on an object
 	    }
+<<<<<<< HEAD
 	}
 //        else {
 //		$('ul#messages').find('li#a-'+datos[0]).remove();
@@ -138,6 +143,18 @@
 
   function alerta(tel){
         $.ajax({
+=======
+	}else {
+		$('ul#messages').find('li#a-'+datos[0]).remove();
+	}    
+
+    });
+    
+    // Envia Alerta
+function alertar() {	
+    var tels = $('#tel').val();
+    $.ajax({
+>>>>>>> origin/master
         type: "POST",
         url: "http://sosmujer.myftp.org/SOSMujer/AppWeb/chat/consultasBD.php",
         data:{tel: 1},

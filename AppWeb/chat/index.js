@@ -3,11 +3,18 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var mysql = require('mysql');
 
+<<<<<<< HEAD
 
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
+=======
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "mzulma",
+  password: "mZulma16$",
+>>>>>>> origin/master
   database: "hackton"
 });
 
@@ -39,6 +46,7 @@ io.on('connection', function(socket){
   socket.on('chat message', function(msg){
 	
 	if(parseInt(msg.al) == 1){
+<<<<<<< HEAD
 		var datos = msg.info.split("@");
 		con.query("INSERT INTO alertas (coordenada, telefono, estado) VALUES (?, ?,?)", [datos[2], datos[0], 'A'],
 		function(err, lastId){
@@ -46,6 +54,14 @@ io.on('connection', function(socket){
 		});
 	}
 	io.emit('chat message', msg);
+=======
+		con.query("INSERT INTO alertas (coordenada, telefono, estado) VALUES (?, ?,?)", [1, 1, 'A'],
+		function(err, lastId){
+			msg['id'] = lastId.insertId;
+			io.emit('chat message', msg);
+		});
+	}
+>>>>>>> origin/master
   });
 });
 
