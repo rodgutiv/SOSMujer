@@ -1,0 +1,109 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "git://git.apache.org/cordova-plugin-device-motion.git",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "git://git.apache.org/cordova-plugin-device-motion.git",
+        "spec": "git://git.apache.org/cordova-plugin-device-motion.git",
+        "type": "git"
+      },
+      "C:\\xampp\\htdocs\\SOSMujer\\AppMovil\\sosmujer\\node_modules"
+    ]
+  ],
+  "_from": "git://git.apache.org/cordova-plugin-device-motion.git",
+  "_id": "cordova-plugin-device-motion@1.2.6-dev",
+  "_inCache": true,
+  "_location": "/cordova-plugin-device-motion",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "git://git.apache.org/cordova-plugin-device-motion.git",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "git://git.apache.org/cordova-plugin-device-motion.git",
+    "spec": "git://git.apache.org/cordova-plugin-device-motion.git",
+    "type": "git"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git://git.apache.org/cordova-plugin-device-motion.git#e4fe3b5cc687a7efcb0f4e8d94daf3480dcba60f",
+  "_shasum": "2ebd100a8ca02e1bb9e8affada2ee8dc38cd80e1",
+  "_shrinkwrap": null,
+  "_spec": "git://git.apache.org/cordova-plugin-device-motion.git",
+  "_where": "C:\\xampp\\htdocs\\SOSMujer\\AppMovil\\sosmujer\\node_modules",
+  "author": {
+    "name": "Apache Software Foundation"
+  },
+  "bugs": {
+    "url": "https://issues.apache.org/jira/browse/CB"
+  },
+  "cordova": {
+    "id": "cordova-plugin-device-motion",
+    "platforms": [
+      "firefoxos",
+      "android",
+      "amazon-fireos",
+      "ubuntu",
+      "ios",
+      "blackberry10",
+      "wp7",
+      "wp8",
+      "windows8",
+      "windows",
+      "tizen",
+      "browser"
+    ]
+  },
+  "dependencies": {},
+  "description": "Cordova Device Motion Plugin",
+  "devDependencies": {
+    "jshint": "^2.6.0"
+  },
+  "engines": {
+    "cordovaDependencies": {
+      "2.0.0": {
+        "cordova": ">100"
+      }
+    }
+  },
+  "gitHead": "e4fe3b5cc687a7efcb0f4e8d94daf3480dcba60f",
+  "homepage": "https://github.com/apache/cordova-plugin-device-motion#readme",
+  "keywords": [
+    "cordova",
+    "device",
+    "motion",
+    "ecosystem:cordova",
+    "cordova-firefoxos",
+    "cordova-android",
+    "cordova-amazon-fireos",
+    "cordova-ubuntu",
+    "cordova-ios",
+    "cordova-blackberry10",
+    "cordova-wp7",
+    "cordova-wp8",
+    "cordova-windows8",
+    "cordova-windows",
+    "cordova-tizen",
+    "cordova-browser"
+  ],
+  "license": "Apache-2.0",
+  "name": "cordova-plugin-device-motion",
+  "optionalDependencies": {},
+  "readme": "---\r\ntitle: Device Motion\r\ndescription: Access accelerometer data.\r\n---\r\n<!---\r\n# license: Licensed to the Apache Software Foundation (ASF) under one\r\n#         or more contributor license agreements.  See the NOTICE file\r\n#         distributed with this work for additional information\r\n#         regarding copyright ownership.  The ASF licenses this file\r\n#         to you under the Apache License, Version 2.0 (the\r\n#         \"License\"); you may not use this file except in compliance\r\n#         with the License.  You may obtain a copy of the License at\r\n#\r\n#           http://www.apache.org/licenses/LICENSE-2.0\r\n#\r\n#         Unless required by applicable law or agreed to in writing,\r\n#         software distributed under the License is distributed on an\r\n#         \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY\r\n#         KIND, either express or implied.  See the License for the\r\n#         specific language governing permissions and limitations\r\n#         under the License.\r\n-->\r\n\r\n|Android 4.4|Android 5.1|Android 6.0|iOS 9.3|iOS 10.0|Windows 10 Store|Travis CI|\r\n|:-:|:-:|:-:|:-:|:-:|:-:|:-:|\r\n|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=android-4.4,PLUGIN=cordova-plugin-device-motion)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=android-4.4,PLUGIN=cordova-plugin-device-motion/)|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=android-5.1,PLUGIN=cordova-plugin-device-motion)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=android-5.1,PLUGIN=cordova-plugin-device-motion/)|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=android-6.0,PLUGIN=cordova-plugin-device-motion)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=android-6.0,PLUGIN=cordova-plugin-device-motion/)|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=ios-9.3,PLUGIN=cordova-plugin-device-motion)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=ios-9.3,PLUGIN=cordova-plugin-device-motion/)|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=ios-10.0,PLUGIN=cordova-plugin-device-motion)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=ios-10.0,PLUGIN=cordova-plugin-device-motion/)|[![Build Status](http://cordova-ci.cloudapp.net:8080/buildStatus/icon?job=cordova-periodic-build/PLATFORM=windows-10-store,PLUGIN=cordova-plugin-device-motion)](http://cordova-ci.cloudapp.net:8080/job/cordova-periodic-build/PLATFORM=windows-10-store,PLUGIN=cordova-plugin-device-motion/)|[![Build Status](https://travis-ci.org/apache/cordova-plugin-device-motion.svg?branch=master)](https://travis-ci.org/apache/cordova-plugin-device-motion)|\r\n\r\n# cordova-plugin-device-motion\r\n\r\nThis plugin provides access to the device's accelerometer. The accelerometer is\r\na motion sensor that detects the change (_delta_) in movement relative to the\r\ncurrent device orientation, in three dimensions along the _x_, _y_, and _z_\r\naxis.\r\n\r\nAccess is via a global `navigator.accelerometer` object.\r\n\r\nAlthough the object is attached to the global scoped `navigator`, it is not available until after the `deviceready` event.\r\n\r\n    document.addEventListener(\"deviceready\", onDeviceReady, false);\r\n    function onDeviceReady() {\r\n        console.log(navigator.accelerometer);\r\n    }\r\n\r\nReport issues with this plugin on the [Apache Cordova issue tracker](https://issues.apache.org/jira/issues/?jql=project%20%3D%20CB%20AND%20status%20in%20%28Open%2C%20%22In%20Progress%22%2C%20Reopened%29%20AND%20resolution%20%3D%20Unresolved%20AND%20component%20%3D%20%22Plugin%20Device%20Motion%22%20ORDER%20BY%20priority%20DESC%2C%20summary%20ASC%2C%20updatedDate%20DESC)\r\n\r\n## Installation\r\n\r\n    cordova plugin add cordova-plugin-device-motion\r\n\r\n## Supported Platforms\r\n\r\n- Amazon Fire OS\r\n- Android\r\n- BlackBerry 10\r\n- Browser\r\n- Firefox OS\r\n- iOS\r\n- Tizen\r\n- Windows Phone 8\r\n- Windows\r\n\r\n## Methods\r\n\r\n- navigator.accelerometer.getCurrentAcceleration\r\n- navigator.accelerometer.watchAcceleration\r\n- navigator.accelerometer.clearWatch\r\n\r\n## Objects\r\n\r\n- Acceleration\r\n\r\n## navigator.accelerometer.getCurrentAcceleration\r\n\r\nGet the current acceleration along the _x_, _y_, and _z_ axes.\r\n\r\nThese acceleration values are returned to the `accelerometerSuccess`\r\ncallback function.\r\n\r\n    navigator.accelerometer.getCurrentAcceleration(accelerometerSuccess, accelerometerError);\r\n\r\n\r\n### Example\r\n\r\n    function onSuccess(acceleration) {\r\n        alert('Acceleration X: ' + acceleration.x + '\\n' +\r\n              'Acceleration Y: ' + acceleration.y + '\\n' +\r\n              'Acceleration Z: ' + acceleration.z + '\\n' +\r\n              'Timestamp: '      + acceleration.timestamp + '\\n');\r\n    }\r\n\r\n    function onError() {\r\n        alert('onError!');\r\n    }\r\n\r\n    navigator.accelerometer.getCurrentAcceleration(onSuccess, onError);\r\n\r\n### Browser Quirks\r\n\r\nValues for X, Y, Z motion are all randomly generated in order to simulate the accelerometer.\r\n\r\n### Android Quirks\r\n\r\nThe accelerometer is called with the `SENSOR_DELAY_UI` flag, which limits the maximum readout frequency to something between 20 and 60 Hz, depending on the device. Values for __period__ corresponding to higher frequencies will result in duplicate samples. More details can be found in the [Android API Guide](http://developer.android.com/guide/topics/sensors/sensors_overview.html#sensors-monitor).\r\n\r\n\r\n### iOS Quirks\r\n\r\n- iOS doesn't recognize the concept of getting the current acceleration at any given point.\r\n\r\n- You must watch the acceleration and capture the data at given time intervals.\r\n\r\n- Thus, the `getCurrentAcceleration` function yields the last value reported from a `watchAccelerometer` call.\r\n\r\n## navigator.accelerometer.watchAcceleration\r\n\r\nRetrieves the device's current `Acceleration` at a regular interval, executing\r\nthe `accelerometerSuccess` callback function each time. Specify the interval in\r\nmilliseconds via the `acceleratorOptions` object's `frequency` parameter.\r\n\r\nThe returned watch ID references the accelerometer's watch interval,\r\nand can be used with `navigator.accelerometer.clearWatch` to stop watching the\r\naccelerometer.\r\n\r\n    var watchID = navigator.accelerometer.watchAcceleration(accelerometerSuccess,\r\n                                                           accelerometerError,\r\n                                                           accelerometerOptions);\r\n\r\n- __accelerometerOptions__: An object with the following optional keys:\r\n  - __frequency__: requested frequency of calls to accelerometerSuccess with acceleration data in Milliseconds. _(Number)_ (Default: 10000)\r\n\r\n\r\n###  Example\r\n\r\n    function onSuccess(acceleration) {\r\n        alert('Acceleration X: ' + acceleration.x + '\\n' +\r\n              'Acceleration Y: ' + acceleration.y + '\\n' +\r\n              'Acceleration Z: ' + acceleration.z + '\\n' +\r\n              'Timestamp: '      + acceleration.timestamp + '\\n');\r\n    }\r\n\r\n    function onError() {\r\n        alert('onError!');\r\n    }\r\n\r\n    var options = { frequency: 3000 };  // Update every 3 seconds\r\n\r\n    var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);\r\n\r\n### iOS Quirks\r\n\r\nThe API calls the success callback function at the interval requested,\r\nbut restricts the range of requests to the device between 40ms and\r\n1000ms. For example, if you request an interval of 3 seconds,\r\n(3000ms), the API requests data from the device every 1 second, but\r\nonly executes the success callback every 3 seconds.\r\n\r\n## navigator.accelerometer.clearWatch\r\n\r\nStop watching the `Acceleration` referenced by the `watchID` parameter.\r\n\r\n    navigator.accelerometer.clearWatch(watchID);\r\n\r\n- __watchID__: The ID returned by `navigator.accelerometer.watchAcceleration`.\r\n\r\n###  Example\r\n\r\n    var watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);\r\n\r\n    // ... later on ...\r\n\r\n    navigator.accelerometer.clearWatch(watchID);\r\n\r\n## Acceleration\r\n\r\nContains `Accelerometer` data captured at a specific point in time.\r\nAcceleration values include the effect of gravity (9.81 m/s^2), so that when a\r\ndevice lies flat and facing up, _x_, _y_, and _z_ values returned should be\r\n`0`, `0`, and `9.81`.\r\n\r\n### Properties\r\n\r\n- __x__:  Amount of acceleration on the x-axis. (in m/s^2) _(Number)_\r\n- __y__:  Amount of acceleration on the y-axis. (in m/s^2) _(Number)_\r\n- __z__:  Amount of acceleration on the z-axis. (in m/s^2) _(Number)_\r\n- __timestamp__: Creation timestamp in milliseconds. _(DOMTimeStamp)_\r\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apache/cordova-plugin-device-motion.git"
+  },
+  "scripts": {
+    "jshint": "node node_modules/jshint/bin/jshint www && node node_modules/jshint/bin/jshint src && node node_modules/jshint/bin/jshint tests",
+    "test": "npm run jshint"
+  },
+  "types": "./types/index.d.ts",
+  "version": "1.2.6-dev"
+}

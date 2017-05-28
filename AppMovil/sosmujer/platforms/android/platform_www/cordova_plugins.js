@@ -15,6 +15,22 @@ module.exports = [
         "runs": true
     },
     {
+        "id": "cordova-plugin-device-motion.Acceleration",
+        "file": "plugins/cordova-plugin-device-motion/www/Acceleration.js",
+        "pluginId": "cordova-plugin-device-motion",
+        "clobbers": [
+            "Acceleration"
+        ]
+    },
+    {
+        "id": "cordova-plugin-device-motion.accelerometer",
+        "file": "plugins/cordova-plugin-device-motion/www/accelerometer.js",
+        "pluginId": "cordova-plugin-device-motion",
+        "clobbers": [
+            "navigator.accelerometer"
+        ]
+    },
+    {
         "id": "cordova-plugin-device.device",
         "file": "plugins/cordova-plugin-device/www/device.js",
         "pluginId": "cordova-plugin-device",
@@ -38,6 +54,7 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.3.2",
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-geolocation": "2.4.3",
+    "cordova-plugin-device-motion": "1.2.6-dev",
     "cordova-plugin-device": "1.1.6",
     "cordova-plugin-background-mode": "0.7.2"
 };

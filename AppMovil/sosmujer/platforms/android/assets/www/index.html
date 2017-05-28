@@ -112,7 +112,9 @@
 
 	<div role="main" class="ui-content">
 		<p class="intro" id="demo"></p>
-        <div id="googleMap"></div>
+        <div id="googleMap">
+            <img src="img/map.png">
+        </div>
         
         <div class="ui-grid-b">
             <div class="ui-block-a"></div>
@@ -128,12 +130,14 @@
     <div data-role="panel" data-position="right" data-display="reveal" id="opciones">
         <div id="panelfooter">
             <a href="#" class="ui-btn  ui-shadow ui-corner-all  ui-icon-gear ui-btn-icon-left">Configuración</a><br>
-            <a href="#" class="ui-btn  ui-shadow ui-corner-all  ui-icon-power ui-btn-icon-left">Salir</a>
+            <a href="#" id="salir" class="ui-btn  ui-shadow ui-corner-all  ui-icon-power ui-btn-icon-left">Salir</a>
         </div>
         <br><br><br><br>
         <a href="#" id="cancel-alert" class="ui-btn ui-btn-b  ui-shadow ui-corner-all  ui-icon-forbidden ui-btn-icon-left">Cancelar Alerta</a>
-        <div data-role="popup" id="popupCancel">
-        <p>Se ha cancelado la Alerta</p>
+
+        <div data-role="popup" id="popupCancel" class="ui-content" style="max-width:280px">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Cerrar</a>
+        <p>Se ha cancelado la <b>alerta</b>.</p>
         </div>
     </div><!-- /panel -->
 </div><!-- /mapa -->
@@ -141,9 +145,9 @@
         
         <!-- Librerías más pesadas -->
         <script type="text/javascript" src="cordova.js"></script>
-        <script src="http://proyecto.myftp.org:3000/socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+        <script src="http://sosmujer.myftp.org:3000/socket.io/socket.io.js"></script>
+        <!-- <script type="text/javascript" src="js/index.js"></script>-->
         <script type="text/javascript" src="js/scripts.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js"></script>
+       <script src="https://maps.googleapis.com/maps/api/js"></script>
     </body>
 </html>

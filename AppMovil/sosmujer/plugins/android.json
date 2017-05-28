@@ -13,6 +13,9 @@
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.example.sosmujer"
         },
+        "cordova-plugin-device-motion": {
+            "PACKAGE_NAME": "com.example.sosmujer"
+        },
         "cordova-plugin-background-mode": {
             "PACKAGE_NAME": "com.example.sosmujer"
         }

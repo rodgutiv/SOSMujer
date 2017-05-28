@@ -1,34 +1,53 @@
-    $(document).ready(function(){
+    //$(document).ready(function() {
+        // The watch id references the current `watchAcceleration`
+        var watchID = null;
+        var mAl = null;
+        var mAc = null;
+        var mAcc = null;
+        var socket = null;
         
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function onDeviceReady() {
+            if(localStorage.getItem("telefono") != null){
+                socket = io.connect('http://sosmujer.myftp.org:3000');
+                $.mobile.pageContainer.pagecontainer("change", "#three", { transition: 'slide'}); 
+                //startWatch();
+                console.log('Sesion iniciada anteriormente');
+                }else{
+                   console.log('NO Sesion iniciada anteriormente'); 
+                }
+            }
+
         $('button#sos').on('click', function(e){
             e.preventDefault();
-              if(parseInt(localStorage.getItem("alerta")) == 0){
-
-                localStorage.setItem("alerta", 1);
-                navigator.geolocation.getCurrentPosition(function(position){
-               var pos = position.coords.latitude  + ',' + position.coords.longitude+'@'+ Date();
-               var socket = io.connect('http://proyecto.myftp.org:3000');
-               socket.emit('chat message', {info: localStorage.getItem("telefono")+'@'+pos, al: 1});
-               //cordova.plugins.backgroundMode.setDefaults({hidden: true});
-               cordova.plugins.backgroundMode.enable();
-                });
-            }
-            
+            enviarSOS(); 
         });
+        
+        //Este es un comentario para fingir que estoy tirando LDC, pero realmente estoy haciendome bien pendejo.
+        //
         
         $('a#cancel-alert').on('click', function(e){
             e.preventDefault();
             if(parseInt(localStorage.getItem("alerta")) == 1){
+             $('button#sos').prop('disabled', false);
             localStorage.setItem("alerta", 0);
-            var socket = io.connect('http://proyecto.myftp.org:3000');
             socket.emit('chat message',{info: localStorage.getItem("telefono"), al: -1});
             cordova.plugins.backgroundMode.disable();
             $( "#popupCancel" ).popup( "open" );
             }
         });
+
+        $('a#salir').on('click', function(e){
+            e.preventDefault();
+            localStorage.removeItem("alerta");
+            localStorage.removeItem("telefono");
+            $.mobile.pageContainer.pagecontainer("change", "#one", { transition: 'slide'}); 
+        });
         
         $('button#entrar').on('click', function(e){
             e.preventDefault();
+  
             if($('#tel').val() != '' && $('#pass').val() != ''){
                 loginCheck();
             }
@@ -71,12 +90,13 @@
         /// Verifica Logeo
 function loginCheck() {	
     var tels = $('#tel').val();
+
     $.ajax({
         type: "POST",
-        url: "http://proyecto.myftp.org/hackton/login/login-session.php",
+        url: "http://sosmujer.myftp.org/hackton/login/login-session.php",
         data:{tel: tels, pass: $('#pass').val()},
         success:function(info){
-            //console.log(info);
+            console.log(info);
                 switch(parseInt(info))
                     {
                	  case -1:
@@ -86,9 +106,14 @@ function loginCheck() {
                     default:
                         localStorage.setItem("alerta", 0);
                         localStorage.setItem("telefono", info);
-                        $.mobile.pageContainer.pagecontainer("change", "#three", { transition: 'slide'});  
+                        socket = io.connect('http://sosmujer.myftp.org:3000');
+                        $.mobile.pageContainer.pagecontainer("change", "#three", { transition: 'slide'}); 
+                        //startWatch();
                		}
-        }                  
+        },
+        error: function(){
+            console.log('x');
+        }
     });
 }
         
@@ -96,7 +121,7 @@ function loginCheck() {
 function registro() {		
     $.ajax({
         type: "POST",
-        url: "http://proyecto.myftp.org/hackton/login/signup.php",
+        url: "http://sosmujer.myftp.org/hackton/login/signup.php",
         data:{tel: parseInt($('#tel-r').val()), telf: parseInt($('#tel-f').val()), email: $('#email-r').val(), pass: $('#pass1').val()},
         success:function(info){
             console.log(info);
@@ -117,9 +142,14 @@ function registro() {
         }                  
     });
 }
+
+$(document).on( "pageinit", "#one, #signin, #signup", function() {
+  
+    
+});
         
 $(document).on( "pageinit", "#three", function() {
-
+  startWatch();
   var x=document.getElementById("demo");
     if (navigator.geolocation)
             {
@@ -136,6 +166,24 @@ $(document).on( "pageinit", "#three", function() {
             
         }, 8000);
 });
+
+function enviarSOS(){
+    console.log('Envia SOS');
+    if(parseInt(localStorage.getItem("alerta")) == 0){
+                $('button#sos').prop('disabled', true);
+               localStorage.setItem("alerta", 1);
+               socket.emit('chat message', {info: localStorage.getItem("telefono")+'@'+'-1.222,0.2525'+'@'+ Date(), al: 1});
+               
+             //7  cordova.plugins.backgroundMode.enable();
+              // cordova.plugins.backgroundMode.setDefaults({hidden: true});
+               navigator.geolocation.getCurrentPosition(function(position){
+               var pos = position.coords.latitude  + ',' + position.coords.longitude+'@'+ Date();
+               console.log('Pos: '+pos);
+               socket.emit('chat message', {info: localStorage.getItem("telefono")+'@'+pos, al: 1});
+               //cordova.plugins.backgroundMode.setDefaults({hidden: true});
+                });
+            }
+}
 
 function showPosition(position)
   {
@@ -176,6 +224,46 @@ function showError(error)
     }
   }
 
-    });
+
+//----- inicia el device motion
+
+
+    function startWatch() {
+        cordova.plugins.backgroundMode.enable();
+        var options = { frequency: 1000 };
+        watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+    }
+
+
+    function stopWatch() {
+        if (watchID) {
+            navigator.accelerometer.clearWatch(watchID);
+            watchID = null;
+        }
+    }
+
+    function onSuccess(acceleration) {
+		var date = new Date(acceleration.timestamp*1000);
+		console.log('activo');
+		var x = acceleration.x;
+		var y = acceleration.y;
+		var z = acceleration.z;
+		mAl =  date.getMilliseconds();
+		mAc = parseFloat(Math.sqrt(parseFloat(x*x+y*y+z*z)));
+		var delta = parseFloat(mAc - mAl);
+		mAcc = mAcc * 9e-9 + delta;
+			
+		if(mAcc > 25){
+				//console.log(mAcc);
+                cordova.plugins.backgroundMode.unlock();
+                enviarSOS();
+			}
+    }
+
+
+    function onError() {
+        console.log('onError!');
+    }
+   // });
 
 
