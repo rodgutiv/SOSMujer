@@ -6,7 +6,7 @@
     background-size: cover;
     background-size:100% 100%;
 }
-#signup.ui-page, #signin.ui-page{
+#signup.ui-page, #signin.ui-page, #datos.ui-page, #sugerencias.ui-page{
     background: url('../img/bg.jpg') no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;

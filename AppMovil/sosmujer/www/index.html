@@ -34,9 +34,9 @@
             </div><!-- /grid-b -->
         
         <br><br><br><br><br><br>
-            <a href="#signin" class="ui-btn ui-corner-all ui-shadow">Ingresar</a>
+            <a href="#signin" data-transition="flip" class="ui-btn ui-corner-all ui-shadow">Ingresar</a>
             <br><p><b>¿No tienes cuenta?</b></p>
-            <a href="#signup" class="ui-btn ui-corner-all ui-shadow">Registrate</a> 
+            <a href="#signup" data-transition="flip" class="ui-btn ui-corner-all ui-shadow">Registrate</a> 
 		
 	</div><!-- /content -->
 </div><!-- /page one -->
@@ -46,7 +46,7 @@
 
 	<div data-role="header" style="border: 0px;">
 		<h4>Ingresar</h4>
-        <a href="#one" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Regresar</a>
+        <a href="#one" data-transition="flip" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Regresar</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
@@ -59,7 +59,17 @@
             <input type="password" name="pass" id="pass" value=""><br><br>
             <button type="submit" class="ui-btn ui-corner-all ui-shadow" id="entrar">Entrar</button>
         </form><br><br>
-            <p><a href="#">¿Problemas para ingresar?</a></p>
+            <p><a href="#popupError" data-rel="popup" data-position-to="window">¿Olvidaste tu contraseña?</a></p>
+        
+        <div data-role="popup" id="popupError" data-theme="a" class="ui-corner-all">
+                <div style="padding:10px 20px;">
+                    <p><b>Ingresa tu email para recuperar contraseña.</b></p>
+                    <label for="un" class="ui-hidden-accessible">Teléfono:</label>
+                    <input type="email" name="r-tel" id="r-tel" value="" data-theme="a">
+
+                    <a href="#signin"  class="ui-btn ui-corner-all ui-shadow" id="r-pass">ENVIAR</a>
+                </div>
+        </div>
 	</div><!-- /content -->
 </div><!-- /page signin -->
 
@@ -81,7 +91,7 @@
 
 	<div data-role="header" style="border: 0px;">
 		<h6>Registrar</h6>
-        <a href="#one" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Regresar</a>
+        <a href="#one" data-transition="flip" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Regresar</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">
@@ -100,7 +110,49 @@
             <button type="submit" class="ui-btn ui-corner-all ui-shadow" id="registrar">CONFIRMAR</button>
         </form>
 	</div><!-- /content -->
-</div><!-- /page signup --> 
+</div><!-- /page signup -->
+
+<!-- Página de Datos personales: #datos -->
+<div data-role="page" id="datos">
+
+	<div data-role="header" style="border: 0px;">
+		<h6>Datos Personales</h6>
+        <a href="#three" data-transition="flip" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Regresar</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+        <br><br><br><br>
+        <form id="ingresar" data-ajax="false">
+            <label for="txt-email">Nombre(s)</label>
+            <input type="text" name="nombre"  id="nombre" value="">
+            <label for="txt-email">Domicilio Actual</label>
+            <input type="text" name="domicilio"  id="domicilio" value="">
+            <br><br>
+            <a href="#three" data-transition="flip" class="ui-btn ui-corner-all ui-shadow" id="save-info">GUARDAR</a>
+        </form>
+	</div><!-- /content -->
+</div><!-- /page datos --> 
+        
+<!-- Página de sugerencias: #sugerencias -->
+<div data-role="page" id="sugerencias">
+
+	<div data-role="header" style="border: 0px;">
+		<h6>Sugerencias</h6>
+        <a href="#three" data-transition="flip" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-icon-carat-l ui-btn-icon-notext">Regresar</a>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+        <br><br><br><br>
+        
+            <label for="txt-email">Nombre(s)</label>
+            <input type="text" name="nombre"  id="nombre" value="">
+            <label for="textarea">Dudas o comentarios</label>
+            <textarea cols="80" rows="8" name="comments" id="comments"></textarea>
+            <br><br>
+            <button type="submit" class="ui-btn ui-corner-all ui-shadow" id="save-info">GUARDAR</button>
+        
+	</div><!-- /content -->
+</div><!-- /page sugerencias --> 
     
 <!-- Página donde se muestra mapa -->
 <div data-role="page" id="three">
@@ -113,23 +165,23 @@
 	<div role="main" class="ui-content">
 		<p class="intro" id="demo"></p>
         <div id="googleMap">
-            <img src="img/map.png">
+            <img src="img/loading.gif" style="display: block; margin: auto;">
         </div>
         
         <div class="ui-grid-b">
             <div class="ui-block-a"></div>
-            <div class="ui-block-b"><br>
+            <div class="ui-block-b"><br><br>
                 <button id="sos" data-role="none" class="btn ui-shadow"><h4>S.O.S</h4></button>
             </div>
             <div class="ui-block-c"></div>
         </div>
 	</div><!-- /content -->
     <div data-role="footer" data-position="fixed">
-        <h2>¿Dudas o Sugerencias?</h2>
+        <a href="#sugerencias" class="ui-btn  ui-mini ui-corner-all  ui-icon-info ui-btn-icon-notext">¿Dudas o Sugerencias?</a>
 	</div><!-- /footer -->
     <div data-role="panel" data-position="right" data-display="reveal" id="opciones">
         <div id="panelfooter">
-            <a href="#" class="ui-btn  ui-shadow ui-corner-all  ui-icon-gear ui-btn-icon-left">Configuración</a><br>
+            <a href="#datos" data-transition="flip" class="ui-btn  ui-shadow ui-corner-all  ui-icon-gear ui-btn-icon-left">Perfil</a><br>
             <a href="#" id="salir" class="ui-btn  ui-shadow ui-corner-all  ui-icon-power ui-btn-icon-left">Salir</a>
         </div>
         <br><br><br><br>

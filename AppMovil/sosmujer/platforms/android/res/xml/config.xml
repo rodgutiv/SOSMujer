@@ -16,6 +16,9 @@
     <feature name="BackgroundMode">
         <param name="android-package" value="de.appplant.cordova.plugin.background.BackgroundMode" />
     </feature>
+    <feature name="Vibration">
+        <param name="android-package" value="org.apache.cordova.vibration.Vibration" />
+    </feature>
     <name>SOSMujer</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

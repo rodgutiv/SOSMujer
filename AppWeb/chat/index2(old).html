@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SOS Mujer</title>
+<!--Import Google Icon Font-->
+ <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!-- Compiled and minified CSS -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
+
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+       <style>
+    .map-cont
+    {
+      height:85%;
+    }
+    .cont
+    {
+      position: absolute;
+      width: 100%;
+      height: 82%;
+    }
+    .map
+    {
+      height: 85%;
+    }
+  </style>
+  </head>
+  <body>
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#!">Cambiar Contraseña</a></li>
+  <li><a href="#!">Salir</a></li>
+</ul>
+<nav>
+  <div class="nav-wrapper pink lighten-3">
+    <a href="#!" class="brand-logo">S.O.S Mujer</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="#">Estadisticas</a></li>
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Cuenta<i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+  </div>
+</nav> 
+ 
+     <div class="row" style="position: absolute; width:100%; height: 100% overflow: scroll">
+	    <div class="col s4">
+	    <ul id="messages" class="collection">
+	    <li class="collection-item active red lighten-1"><h4>Alertas</h4></li>
+	    </ul>
+	    </div>
+	    <div class="col s8" style="height:85%"><div id="map" style="width:100%; height:65%"></div></div>
+	  </div>
+    <script src="http://sosmujer.myftp.org:3000/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="http://sosmujer.myftp.org/SOSMujer/AppWeb/chat/js/jquery.js"></script>
+    <script type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrL7KvqJsrKRh93vxPvrUlCCdNBzi6_Q8&libraries=geometry,places,drawing">
+</script>
+      <!-- Compiled and minified JavaScript -->
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+		
+<script>
+	$(document).ready(function(){
+	window.onbeforeunload = function() {
+   return "Se perderan las alertas, deseas recargar la pagina?";
+};
+		var socket = io();
+    $('form').submit(function(){
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+
+  //   Inicializar latitud y longitud
+  var myLatLng = {lat: 19.7024228, lng: -101.1923184};
+    // Create a map object and specify the DOM element for display.
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: myLatLng,
+      scrollwheel: false,
+      zoom: 17
+    });
+    var marker = new google.maps.Marker({
+      map: map,
+      position: myLatLng,
+      title: 'Lugar de alerta'
+    });
+
+    socket.on('chat message', function(msg){
+	console.log('Datos cada 6 seg: '+msg);
+    var datos = msg.info.split("@");
+
+	if (parseInt(msg.al) == 1) {
+		 if($('ul#messages').find('li#a-'+datos[0]).length == 0){
+	    var msj1 = '<li id="a-'+datos[0]+'" class="collection-item avatar"><a href="#" class="secondary-content"><i class="small material-icons">visibility</i></a><span class="title"><b>Alerta enviada: </b>'+datos[3]+'</span><p>';
+	    var msj2 = '<p><b <span class="red-text text-darken-2">Teléfono:</b> '+datos[0]+'<br><b>Teléfono de Familiar: </b>'+datos[1]+'</p>';
+	    var msj3 = '</p><a id="l-'+datos[0]+'" onclick="quitarAlerta()" target="_blank" class="secondary-content"><i class="small material-icons">clear</i></a></li>';
+      
+	    $('#messages').append(msj1+msj2+msj3);
+      //To divide lat and long to put them on an object
+            var latilong = datos[2].split(",");
+            var lat = parseInt(latilong[0]);
+            var lng = parseInt(latilong[1]);
+            myLatLng =  {lat: lat, lng: lng};
+            map.setCenter(myLatLng);
+            marker.setPosition(myLatLng);
+            marker.setAnimation(google.maps.Animation.DROP);
+	    }else {
+	    	$('ul#messages').find('a#l-'+datos[0]).attr('href','maps.google.com/maps?q='+datos[2]);
+        //To divide lat and long to put them on an object
+            var latilong = datos[2].split(",");
+            var lat = parseInt(latilong[0]);
+            var lng = parseInt(latilong[1]);
+            myLatLng =  {lat: lat, lng: lng};
+            map.setCenter(myLatLng);
+            marker.setPosition(myLatLng);
+            marker.setAnimation(google.maps.Animation.DROP);
+	    }
+	}
+//        else {
+//		$('ul#messages').find('li#a-'+datos[0]).remove();
+//	}    
+
+    });
+    
+	function quitarAlerta(){
+        $('ul#messages').find('li#a-'+datos[0]).remove();
+    }
+		});
+    
+   
+</script>
+  </body>
+</html>

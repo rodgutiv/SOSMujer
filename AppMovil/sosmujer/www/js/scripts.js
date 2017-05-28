@@ -5,14 +5,17 @@
         var mAc = null;
         var mAcc = null;
         var socket = null;
+        var coordenadas = null;
         
         document.addEventListener("deviceready", onDeviceReady, false);
 
         function onDeviceReady() {
             if(localStorage.getItem("telefono") != null){
+                var quien = localStorage.getItem("telefono").split('@');
+                
                 socket = io.connect('http://sosmujer.myftp.org:3000');
+                socket.emit('send-tel', quien[0]);
                 $.mobile.pageContainer.pagecontainer("change", "#three", { transition: 'slide'}); 
-                //startWatch();
                 console.log('Sesion iniciada anteriormente');
                 }else{
                    console.log('NO Sesion iniciada anteriormente'); 
@@ -21,6 +24,7 @@
 
         $('button#sos').on('click', function(e){
             e.preventDefault();
+            navigator.vibrate(1200);
             enviarSOS(); 
         });
         
@@ -34,6 +38,7 @@
             localStorage.setItem("alerta", 0);
             socket.emit('chat message',{info: localStorage.getItem("telefono"), al: -1});
             cordova.plugins.backgroundMode.disable();
+            clearInterval(coordenadas);
             $( "#popupCancel" ).popup( "open" );
             }
         });
@@ -42,7 +47,7 @@
             e.preventDefault();
             localStorage.removeItem("alerta");
             localStorage.removeItem("telefono");
-            $.mobile.pageContainer.pagecontainer("change", "#one", { transition: 'slide'}); 
+            $.mobile.pageContainer.pagecontainer("change", "#one", { transition: 'flip'}); 
         });
         
         $('button#entrar').on('click', function(e){
@@ -50,6 +55,14 @@
   
             if($('#tel').val() != '' && $('#pass').val() != ''){
                 loginCheck();
+            }
+        });
+
+        $('button#save-info').on('click', function(e){
+            e.preventDefault();
+  
+            if($('#nombre').val() != '' && $('#domicilio').val() != ''){
+                guardarInfo();
             }
         });
         
@@ -106,9 +119,35 @@ function loginCheck() {
                     default:
                         localStorage.setItem("alerta", 0);
                         localStorage.setItem("telefono", info);
+                        var quien = info.split('@');
+                
                         socket = io.connect('http://sosmujer.myftp.org:3000');
-                        $.mobile.pageContainer.pagecontainer("change", "#three", { transition: 'slide'}); 
-                        //startWatch();
+                        socket.emit('send-tel', quien[0]);
+                        $.mobile.pageContainer.pagecontainer("change", "#three", { transition: 'flip'}); 
+               		}
+        },
+        error: function(){
+            console.log('Error');
+        }
+    });
+}
+
+        /// guarda datos personales
+function guardarInfo() {	
+    var tels = localStorage.getItem('telefono');
+    $.ajax({
+        type: "POST",
+        url: "http://sosmujer.myftp.org/hackton/login/guardar-info.php",
+        data:{nom: $('#nombre').val(), domi: $('#domicilio').val(), tel: tels},
+        success:function(info){
+                switch(parseInt(info))
+                    {
+               	  case 1:
+                        $.mobile.pageContainer.pagecontainer("change", "#three", { transition: 'flip'});          
+                  break;
+                    default:
+                        $('div#error').find('p#msj').text('Ups... ha ocurrido un error, intenta nuevamente.');
+                        $.mobile.pageContainer.pagecontainer("change", "#error", {role: 'dialog', transition: 'pop'});
                		}
         },
         error: function(){
@@ -128,7 +167,7 @@ function registro() {
                 switch(parseInt(info))
                     {
                   case 1:
-                  $.mobile.pageContainer.pagecontainer("change", "#signin", { transition: 'slide'});         
+                  $.mobile.pageContainer.pagecontainer("change", "#signin", { transition: 'flip'});         
                   break;
                	  case -1:
                   $('div#error').find('p#msj').text('Ha ocurrido un error, intenta nuevamente');
@@ -143,20 +182,18 @@ function registro() {
     });
 }
 
-$(document).on( "pageinit", "#one, #signin, #signup", function() {
-  
-    
-});
+
         
 $(document).on( "pageinit", "#three", function() {
   startWatch();
+    
   var x=document.getElementById("demo");
     if (navigator.geolocation)
             {
             navigator.geolocation.getCurrentPosition(showPosition,showError);
             }
           else{x.innerHTML="Geolocalización no está soportada.";}
-        // Comienza seguimiento    
+        // Comienza seguimiento
         setInterval(function(){
             if (navigator.geolocation)
             {
@@ -170,18 +207,15 @@ $(document).on( "pageinit", "#three", function() {
 function enviarSOS(){
     console.log('Envia SOS');
     if(parseInt(localStorage.getItem("alerta")) == 0){
-                $('button#sos').prop('disabled', true);
-               localStorage.setItem("alerta", 1);
-               socket.emit('chat message', {info: localStorage.getItem("telefono")+'@'+'-1.222,0.2525'+'@'+ Date(), al: 1});
-               
-             //7  cordova.plugins.backgroundMode.enable();
-              // cordova.plugins.backgroundMode.setDefaults({hidden: true});
-               navigator.geolocation.getCurrentPosition(function(position){
-               var pos = position.coords.latitude  + ',' + position.coords.longitude+'@'+ Date();
-               console.log('Pos: '+pos);
-               socket.emit('chat message', {info: localStorage.getItem("telefono")+'@'+pos, al: 1});
-               //cordova.plugins.backgroundMode.setDefaults({hidden: true});
-                });
+        $('button#sos').prop('disabled', true);
+        localStorage.setItem("alerta", 1);
+        coordenadas = setInterval(function () {
+                   navigator.geolocation.getCurrentPosition(function(position){
+                   var pos = position.coords.latitude  + ',' + position.coords.longitude+'@'+ Date();
+                   console.log('Pos: '+pos);
+                   socket.emit('chat message', {info: localStorage.getItem("telefono")+'@'+pos, al: 1});
+                    });
+            }, 6000);  
             }
 }
 
@@ -236,6 +270,7 @@ function showError(error)
 
 
     function stopWatch() {
+        console.log('detiene watch');
         if (watchID) {
             navigator.accelerometer.clearWatch(watchID);
             watchID = null;
@@ -254,8 +289,9 @@ function showError(error)
 		mAcc = mAcc * 9e-9 + delta;
 			
 		if(mAcc > 25){
-				//console.log(mAcc);
-                cordova.plugins.backgroundMode.unlock();
+                //cordova.plugins.backgroundMode.unlock();
+                cordova.plugins.backgroundMode.moveToForeground();
+                navigator.vibrate(1200);
                 enviarSOS();
 			}
     }

@@ -36,26 +36,39 @@
   <li><a href="#!">Salir</a></li>
 </ul>
 <nav>
-  <div class="nav-wrapper pink lighten-3">
-    <a href="#!" class="brand-logo">S.O.S Mujer</a>
+  <div class="nav-wrapper purple darken-3">
+    <a href="#" class="brand-logo" style="padding-left:13%"><img src="http://sosmujer.myftp.org/SOSMujer/AppWeb/chat/js/sos.png" style="position: relative; width:80px; padding-left: 5%;"/></a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="#">Estadisticas</a></li>
-      <!-- Dropdown Trigger -->
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Cuenta<i class="material-icons right">arrow_drop_down</i></a></li>
+      <a href="#" class="brand-logo" style="padding-left:13%"><img src="http://sosmujer.myftp.org/SOSMujer/AppWeb/chat/js/sos.png" style="position: relative; width:80px; padding-left: 5%;"/></a>
+
     </ul>
   </div>
 </nav> 
  
-     <div class="row" style="position: absolute; width:100%; height: 100% overflow: scroll">
-	    <div class="col s4">
+     <div class="row" style="position: absolute; width:100%; height: 88%">
+	    <div class="col s4" style=" height: 100%; overflow-y: auto">
 	    <ul id="messages" class="collection">
-	    <li class="collection-item active red lighten-1"><h4>Alertas</h4></li>
+        <div id="alertas">
+	    <li class="collection-item active transparent" style="border-style:hidden;"><h4 class="purple-text text-darken-3" style="text-align: center;">Alertas</h4></li>
+    </div>
 	    </ul>
 	    </div>
-	    <div class="col s8" style="height:85%"><div id="map" style="width:100%; height:65%"></div></div>
+         
+         
+	    <div class="col s8" style="height:100%">
+            <div id="datos" style="width:100%; height:28%; margin-top: 4px; padding-top:7px;">
+                <span class="title"><b>Nombre de la posible victima: </b><label id="nombre"></label> </span><br>
+                <span class="title"><p><b>Número telefónico: </b><label id="telefono"></label></p></span>
+                <span class="title"><p><b>Número telefónico de emergencia: </b><label id="telefono2"></label></p></span>
+                <span class="title"><p><b>Domicilio: </b><label id="domicilio"></label></p></span>
+                
+            </div>
+            <div id="map" style="width:100%; height:65%"></div>
+         </div>
 	  </div>
     <script src="http://sosmujer.myftp.org:3000/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="http://sosmujer.myftp.org/SOSMujer/AppWeb/chat/js/jquery.js"></script>
+    <script type="text/javascript" src="http://sosmujer.myftp.org/SOSMujer/AppWeb/chat/js/js.cookie.js"></script>
     <script type="text/javascript"
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrL7KvqJsrKRh93vxPvrUlCCdNBzi6_Q8&libraries=geometry,places,drawing">
 </script>
@@ -75,9 +88,9 @@
     });
 
   //   Inicializar latitud y longitud
-  var myLatLng = {lat: 19.7024228, lng: -101.1923184};
+  //var myLatLng = {lat: 19.7024228, lng: -101.1923184};
     // Create a map object and specify the DOM element for display.
-    var map = new google.maps.Map(document.getElementById('map'), {
+   /* var map = new google.maps.Map(document.getElementById('map'), {
       center: myLatLng,
       scrollwheel: false,
       zoom: 17
@@ -87,48 +100,68 @@
       position: myLatLng,
       title: 'Lugar de alerta'
     });
-
+*/
     socket.on('chat message', function(msg){
-
+	console.log('Datos cada 6 seg: '+msg);
     var datos = msg.info.split("@");
-
+    Cookies.set('info', msg);
 	if (parseInt(msg.al) == 1) {
 		 if($('ul#messages').find('li#a-'+datos[0]).length == 0){
-	    var msj1 = '<li id="a-'+datos[0]+'" class="collection-item avatar"><a href="#" class="secondary-content"><i class="small material-icons">visibility</i></a><span class="title"><b>Alerta enviada: </b>'+datos[3]+'</span><p>';
-	    var msj2 = '<p><b <span class="red-text text-darken-2">Teléfono:</b> '+datos[0]+'<br><b>Teléfono de Familiar: </b>'+datos[1]+'</p>';
-	    var msj3 = '</p><a id="l-'+datos[0]+'" onclick="quitarAlerta()" target="_blank" class="secondary-content"><i class="small material-icons">clear</i></a></li>';
+	    var msj1 = '<li id="a-'+datos[0]+'" class="collection-item avatar" style="cursor: pointer;"><a onclick="cambiarColor('+datos[0]+')" class="secondary-content"><i class="small material-icons">visibility</i></a><span class="title"><b>Alerta enviada: </b><label id="info">'+datos[3]+'</label></span><p>';
+	    console.log(datos[2]);
+		var msj2 = '<p><b <span class="red-text text-darken-2">Teléfono:</b><label id="telefono">'+datos[0]+'</label><br><b>Teléfono de Familiar: </b>'+datos[1]+'</p>';
+	    var msj3 = '</p><a id="l-'+datos[0]+'" target="_blank" href="http://maps.google.com/maps?q="'+datos[2]+'" class="secondary-content"><i class="small material-icons">clear</i></a></li>';
       
 	    $('#messages').append(msj1+msj2+msj3);
       //To divide lat and long to put them on an object
-            var latilong = datos[2].split(",");
+            /*var latilong = datos[2].split(",");
             var lat = parseInt(latilong[0]);
             var lng = parseInt(latilong[1]);
             myLatLng =  {lat: lat, lng: lng};
             map.setCenter(myLatLng);
             marker.setPosition(myLatLng);
-            marker.setAnimation(google.maps.Animation.DROP);
+            marker.setAnimation(google.maps.Animation.DROP);*/
 	    }else {
 	    	$('ul#messages').find('a#l-'+datos[0]).attr('href','maps.google.com/maps?q='+datos[2]);
         //To divide lat and long to put them on an object
-            var latilong = datos[2].split(",");
-            var lat = parseInt(latilong[0]);
-            var lng = parseInt(latilong[1]);
-            myLatLng =  {lat: lat, lng: lng};
-            map.setCenter(myLatLng);
-            marker.setPosition(myLatLng);
-            marker.setAnimation(google.maps.Animation.DROP);
 	    }
 	}
 //        else {
 //		$('ul#messages').find('li#a-'+datos[0]).remove();
 //	}    
+});
+  /*$('ul#messages').on('click','a',function(e){
+    e.preventDefault();
+    var tel = $(this).closest('li').attr('id').replace("a-", "");
+	socket.emit('mapa', tel);
+  });*/
 
+  function alerta(tel){
+        $.ajax({
+        type: "POST",
+        url: "http://sosmujer.myftp.org/SOSMujer/AppWeb/chat/consultasBD.php",
+        data:{tel: 1},
+        success:function(info){
+            console.log(info);
+        },
+        error: function(){
+            console.log('Error');
+        }
     });
+}
+  });
+
+
     
-	function quitarAlerta(){
+    function quitarAlerta(datos){
         $('ul#messages').find('li#a-'+datos[0]).remove();
     }
-		});
+
+    function cambiarColor(datos){
+        var idelemento = "a-"+datos[0];
+        var elemento = document.getElementById(idelemento);
+        elemento.style.background="blue";
+    }
     
    
 </script>
