@@ -15,3 +15,7 @@ Repositorio oficial de la app desarrollada para el H. Ayuntamiento de Morelia.
 - Descargar e instalar NodeJS. Descargable desde https://nodejs.org/en/download/. Durante la instalación, habilitar la opción de ejecutar "npm" y "node" desde línea de comando.
 
 - (OPCIONAL) Descargar e instalar un cliente Git desde https://git-scm.com/downloads. Durante la instalación, habilitar la opción de ejecutar "git" desde línea de comando.
+
+- Descargar e instalar Apache Cordova usando la utilería npm de NodeJS. Los pasos a seguir para la instalación se encuentran disponibles desde la página oficial https://cordova.apache.org/.
+
+**No se especifican pre-requisitos para la descarga del código fuente del sistema web de control central**
